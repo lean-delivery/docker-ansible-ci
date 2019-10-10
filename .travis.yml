@@ -6,16 +6,17 @@ branches:
   - master-test
 
 matrix:
+  fast_finish: true
   include:
   - name: "ansible-2.8"
     env:
-      - ANSIBLE="2.8.*"
-      - MOLECULE="2.22"
+      - ANSIBLE_VERSION="2.8.*"
+      - MOLECULE_VERSION="2.22"
       - TAG="ansible-2.8"
   - name: "ansible-2.7"
     env:
-     - ANSIBLE="2.7.*" 
-     - MOLECULE="2.22"
+     - ANSIBLE_VERSION="2.7.*"
+     - MOLECULE_VERSION="2.22"
      - TAG="ansible-2.7"
 
 services:
@@ -24,8 +25,8 @@ services:
 before_install:
   - |
     docker build -t leandelivery/docker-ansible-ci:$TAG \
-    --build-arg ANSIBLE \
-    --build-arg MOLECULE \
+    --build-arg ANSIBLE_VERSION \
+    --build-arg MOLECULE_VERSION \
     .
 
 deploy:
