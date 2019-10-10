@@ -31,8 +31,6 @@ before_install:
 
 deploy:
   provider: script
-  script:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker push leandelivery/docker-ansible-ci:$TAG
+  script: bash docker_push
   on:
     branch: master-test
