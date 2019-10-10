@@ -9,7 +9,7 @@ matrix:
   include:
   - name: "ansible-2.8"
     env: ANSIBLE="2.8.*" MOLECULE="2.22" TAG="ansible-2.8"
-  - name: "ansible-2.8"
+  - name: "ansible-2.7"
     env: ANSIBLE="2.7.*" MOLECULE="2.22" TAG="ansible-2.7"
 
 services:
