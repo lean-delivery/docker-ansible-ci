@@ -1,0 +1,28 @@
+---
+language: bash
+
+branches:
+  only:
+  - master-test
+
+matrix:
+  include:
+  - name: "ansible-2.8"
+    env: ANSIBLE="2.8.*" MOLECULE="2.22" TAG="ansible-2.8"
+  - name: "ansible-2.8"
+    env: ANSIBLE="2.7.*" MOLECULE="2.22" TAG="ansible-2.7"
+
+services:
+  - docker
+
+before_install:
+  - docker build -t leandelivery/docker-ansible-ci:$TAG \
+    --build-arg ANSIBLE \
+    --build-arg MOLECULE \
+    .
+
+deploy:
+  provider: script
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push leandelivery/docker-ansible-ci:$TAG
