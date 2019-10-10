@@ -3,7 +3,7 @@ language: bash
 
 branches:
   only:
-  - master-test
+  - master
 
 matrix:
   fast_finish: true
@@ -33,4 +33,4 @@ deploy:
   provider: script
   script: bash docker_push
   on:
-    branch: master-test
+    branch: master
