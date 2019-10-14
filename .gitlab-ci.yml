@@ -1,3 +1,6 @@
+services:
+- docker:dind
+
 ansible-2.8:
   extends: .template
   variables:
