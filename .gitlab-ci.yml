@@ -24,7 +24,7 @@ ansible-2.7:
     - docker build -t $REPOSITORY_URL:$TAG --build-arg $ANSIBLE_VERSION --build-arg $MOLECULE_VERSION .
     - docker push $REPOSITORY_URL:$TAG
     - docker logout
-  only:
-    - master
+  # only:
+  #   - master
   tags:
     - aws
