@@ -8,10 +8,10 @@ ENV MOLECULE_VERSION=${MOLECULE_VERSION}
 
 LABEL maintainer="team@lean-delivery.com"
 
-RUN apk add --no-cache git python3-dev gcc musl-dev libffi-dev openssl-dev make wget unzip
+RUN apk add --no-cache git python3-dev gcc musl-dev libffi-dev openssl-dev make
 RUN apk add --no-cache openssh-client
-RUN wget --quiet https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip \
-    && unzip terraform_0.12.12_linux_amd64.zip
+RUN wget --quiet https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip \
+    && unzip terraform_0.11.11_linux_amd64.zip
 RUN pip3 install --no-cache --upgrade pip setuptools==41.0.0 wheel
 #RUN pip3 install git+https://github.com/ansible/molecule@$MOLECULE_VERSION
 #RUN pip3 install \
