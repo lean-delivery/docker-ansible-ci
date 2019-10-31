@@ -15,7 +15,7 @@ ansible-2.7:
 .template:
   image: "docker:latest"
   variables:
-    REPOSITORY_URL: "874811656702.dkr.ecr.us-east-1.amazonaws.com/docker-ansible-ci"
+    REPOSITORY_URL: "998383315469.dkr.ecr.us-east-1.amazonaws.com/docker-ansible-ci"
   before_script:
     - apk add --no-cache curl jq python py-pip
     - pip install awscli
@@ -24,7 +24,5 @@ ansible-2.7:
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker push $REPOSITORY_URL:$TAG
     - docker logout
-  # only:
-  #   - master
   tags:
     - aws
