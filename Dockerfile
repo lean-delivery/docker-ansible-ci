@@ -8,7 +8,7 @@ ENV MOLECULE_VERSION=${MOLECULE_VERSION}
 
 LABEL maintainer="team@lean-delivery.com"
 
-RUN apk add --no-cache git python3-dev gcc rsync musl-dev libffi-dev openssl-dev make openssh-client && rm -rf /var/cache/apk/*
+RUN apk add --no-cache bash git python3-dev gcc rsync musl-dev libffi-dev openssl-dev make openssh-client && rm -rf /var/cache/apk/*
 RUN wget --quiet https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip \
     && unzip terraform_0.12.13_linux_amd64.zip && mv terraform /usr/bin/ && rm terraform_0.12.13_linux_amd64.zip
 RUN pip3 install --no-cache --upgrade pip setuptools==41.0.0 wheel pywinrm[credssp] boto boto3 \
