@@ -10,7 +10,7 @@ LABEL maintainer="team@lean-delivery.com"
 
 RUN apk add -U python3 bash jq git && \
     apk add --no-cache --virtual .build-deps python3-dev gcc rsync make openssl-dev libffi-dev musl-dev linux-headers openssh-client \
-    rm -rf /var/cache/apk/* && wget --quiet https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip \
+    && rm -rf /var/cache/apk/* && wget --quiet https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip \
     && unzip terraform_0.12.13_linux_amd64.zip && mv terraform /usr/bin/ && rm terraform_0.12.13_linux_amd64.zip && \
     pip3 install --no-cache --upgrade pip wheel pywinrm[credssp] boto boto3 \
     ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION \
