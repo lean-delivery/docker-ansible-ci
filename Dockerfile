@@ -8,12 +8,13 @@ ENV MOLECULE_VERSION=${MOLECULE_VERSION}
 
 LABEL maintainer="team@lean-delivery.com"
 
-RUN apk add --no-cache git python3-dev gcc rsync musl-dev libffi-dev openssl-dev make openssh-client
+RUN apk add --no-cache git python3-dev gcc rsync musl-dev libffi-dev openssl-dev make openssh-client && rm -rf /var/cache/apk/*
 RUN wget --quiet https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip \
     && unzip terraform_0.11.11_linux_amd64.zip
 RUN pip3 install --no-cache --upgrade pip setuptools==41.0.0 wheel pywinrm[credssp] boto boto3 \
     ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION \
     git+https://github.com/ansible/ansible-lint.git
+COPY terraform /usr/bin
 #RUN pip3 install git+https://github.com/ansible/molecule@$MOLECULE_VERSION
 #RUN pip3 install \
 #   --index-url https://test.pypi.org/simple \
