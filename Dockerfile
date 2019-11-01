@@ -10,7 +10,8 @@ LABEL maintainer="team@lean-delivery.com"
 
 RUN apk add --no-cache git python3-dev gcc musl-dev libffi-dev openssl-dev make
 RUN apk add --no-cache openssh-client
-
+RUN wget --quiet https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip \
+    && unzip terraform_0.11.11_linux_amd64.zip
 RUN pip3 install --no-cache --upgrade pip setuptools==41.0.0 wheel
 #RUN pip3 install git+https://github.com/ansible/molecule@$MOLECULE_VERSION
 #RUN pip3 install \
@@ -20,6 +21,7 @@ RUN pip3 install --no-cache --upgrade pip setuptools==41.0.0 wheel
 RUN pip3 install molecule==$MOLECULE_VERSION
 RUN pip3 install --upgrade ansible==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest
 RUN pip3 install pywinrm[credssp] boto boto3
+RUN pip3 install ansible[azure]
 RUN pip3 install git+https://github.com/ansible/ansible-lint.git && \
     ansible --version && \
     ansible-lint --version && \
