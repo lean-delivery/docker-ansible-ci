@@ -20,7 +20,7 @@ ansible-2.7:
     - apk add --no-cache curl jq python py-pip
     - pip install awscli
   script:
-    - aws ecr get-login --region us-east-1
+    - $(aws ecr get-login --no-include-email --region us-east-1)
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker push $REPOSITORY_URL:$TAG
     - docker logout
