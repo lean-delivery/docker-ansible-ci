@@ -15,7 +15,7 @@ RUN apk add -U python3 bash jq git && \
     pip3 install --no-cache --upgrade pip wheel pywinrm[credssp] boto boto3 \
     ansible[azure]==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest molecule==$MOLECULE_VERSION \
     git+https://github.com/ansible/ansible-lint.git && ln -s /usr/bin/python3 /usr/bin/python && \
-    pip3 install --no-cache azure-cli==2.0.44 && 
+    pip3 install --no-cache azure-cli==2.0.44 && \
 #    pip3 install --upgrade requests && \
 #    pip3 install --no-cache azure-cli && ln -s /usr/bin/python3 /usr/bin/python
 #RUN pip3 install git+https://github.com/ansible/molecule@$MOLECULE_VERSION
@@ -30,5 +30,5 @@ RUN apk add -U python3 bash jq git && \
 # RUN pip3 install git+https://github.com/ansible/ansible-lint.git && \
     ansible --version && \
     ansible-lint --version && \
-    molecule --version
+    molecule --version && \
     az --version
