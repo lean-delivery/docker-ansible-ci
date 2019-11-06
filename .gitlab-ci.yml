@@ -1,3 +1,10 @@
+ansible-2.9:
+  extends: .template
+  variables:
+    ANSIBLE_VERSION: "2.9.*"
+    MOLECULE_VERSION: "2.22"
+    TAG: "ansible-2.9"
+
 ansible-2.8:
   extends: .template
   variables:
