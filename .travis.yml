@@ -13,6 +13,11 @@ branches:
 matrix:
   fast_finish: true
   include:
+  - name: "ansible-2.9"
+    env:
+      - ANSIBLE_VERSION="2.9.*"
+      - MOLECULE_VERSION="2.22"
+      - TAG="ansible-2.9"
   - name: "ansible-2.8"
     env:
       - ANSIBLE_VERSION="2.8.*"
