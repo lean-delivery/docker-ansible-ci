@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lean-delivery/docker-ansible-ci.svg?branch=master)](https://travis-ci.org/lean-delivery/docker-ansible-ci)
+
 docker-ansible-ci
 =========
 Dockerfile for building gitlab-runner `docker+machine/docker` executor image
