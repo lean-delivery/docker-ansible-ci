@@ -8,8 +8,8 @@ ENV MOLECULE_VERSION=${MOLECULE_VERSION}
 
 LABEL maintainer="team@lean-delivery.com"
 
-RUN apk add -U python3 bash jq git
-RUN apk add --no-cache python3-dev gcc rsync make openssl-dev libffi-dev musl-dev linux-headers openssh-client \
+# RUN apk add -U python3 bash jq git
+RUN apk add --no-cache bash jq git python3 python3-dev gcc rsync make openssl-dev libffi-dev musl-dev linux-headers openssh-client \
     && rm -rf /var/cache/apk/*
 RUN python3 -m pip install --no-cache --upgrade pip
 #wheel pywinrm[credssp] boto boto3
