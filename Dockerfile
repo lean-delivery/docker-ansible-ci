@@ -18,7 +18,7 @@ RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip setuptools wheel
 #   --index-url https://test.pypi.org/simple \
 #   --extra-index-url https://pypi.org/simple \
 #   molecule==2.21.dev46
-RUN /usr/bin/python3 -m pip install --upgrade ansible==2.9.* molecule==3.* molecule-ec2 ansible-lint
+RUN /usr/bin/python3 -m pip install --upgrade ansible==$ANSIBLE_VERSION molecule==$MOLECULE_VERSION molecule-ec2 ansible-lint
 RUN /usr/bin/python3 -m pip install --upgrade pywinrm[credssp] boto boto3
 RUN ansible --version && \
     ansible-lint --version && \
