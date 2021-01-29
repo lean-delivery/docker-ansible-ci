@@ -24,7 +24,7 @@ ansible-2.9:
   variables:
     REPOSITORY_URL: "998383315469.dkr.ecr.us-east-1.amazonaws.com/docker-ansible-ci"
   before_script:
-    - apk add --update --no-cache curl jq python py-pip
+    - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
     - pip install awscli
   script:
     - $(aws ecr get-login --no-include-email --region us-east-1)
