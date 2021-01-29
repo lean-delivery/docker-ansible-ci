@@ -18,9 +18,9 @@ RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip setuptools wheel
 #   --index-url https://test.pypi.org/simple \
 #   --extra-index-url https://pypi.org/simple \
 #   molecule==2.21.dev46
-RUN /usr/bin/python3 -m pip install molecule==$MOLECULE_VERSION
-RUN /usr/bin/python3 -m pip install --upgrade ansible==$ANSIBLE_VERSION docker pyOpenSSL PyYAML pytest
-RUN /usr/bin/python3 -m pip install pywinrm[credssp] boto boto3
+RUN /usr/bin/python3 -m pip install --upgrade ansible==$ANSIBLE_VERSION docker pyOpenSSL PyYAML
+RUN /usr/bin/python3 -m pip install --upgrade pywinrm[credssp] boto boto3
+RUN /usr/bin/python3 -m pip install --upgrade molecule==$MOLECULE_VERSION
 RUN /usr/bin/python3 -m pip install git+https://github.com/ansible/ansible-lint.git && \
     ansible --version && \
     ansible-lint --version && \
