@@ -27,7 +27,8 @@ ansible-2.9:
     - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
     - pip install awscli
   script:
-    - $(aws ecr get-login --no-include-email --region us-east-1)
+#    - $(aws ecr get-login --no-include-email --region us-east-1)
+    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 998383315469.dkr.ecr.us-east-1.amazonaws.com
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker push $REPOSITORY_URL:$TAG
   tags:
