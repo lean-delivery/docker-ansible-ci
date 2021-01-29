@@ -11,7 +11,7 @@ ansible-2.9 build:
     TAG: "ansible-2.9"
   artifacts:
     paths:
-      - 9
+      - "9"
 
 ansible-2.10 build:
   stage: build
@@ -22,7 +22,7 @@ ansible-2.10 build:
     TAG: "ansible-2.10"
   artifacts:
     paths:
-      - 10
+      - "10"
 
 ansible-2.9 deploy:
   stage: deploy
