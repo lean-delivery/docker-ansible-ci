@@ -9,6 +9,9 @@ ansible-2.9 build:
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.9"
+  artifacts:
+    paths:
+      - 9
 
 ansible-2.10 build:
   stage: build
@@ -17,11 +20,15 @@ ansible-2.10 build:
     ANSIBLE_VERSION: "2.10.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.10"
+  artifacts:
+    paths:
+      - 10
 
 ansible-2.9 deploy:
   stage: deploy
   extends: .template_deploy
   variables:
+    LOCAL_PATH: '9'
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.9"
@@ -30,6 +37,7 @@ ansible-2.10 deploy:
   stage: deploy
   extends: .template_deploy
   variables:
+    LOCAL_PATH: '10'
     ANSIBLE_VERSION: "2.10.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.10"
