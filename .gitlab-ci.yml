@@ -12,24 +12,34 @@ ansible-2.10:
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.10"
 
-# ansible-2.7:
-#   extends: .template
-#   variables:
-#     ANSIBLE_VERSION: "2.7.*"
-#     MOLECULE_VERSION: "2.22"
-#     TAG: "ansible-2.7"
-
 .template:
-  image: "docker:latest"
+  image: docker:latest
+
   variables:
-    REPOSITORY_URL: "998383315469.dkr.ecr.us-east-1.amazonaws.com/docker-ansible-ci"
+    REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
+
+  stages:
+    - build
+    - deploy
+
   before_script:
     - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
     - pip install awscli
-  script:
-#    - $(aws ecr get-login --no-include-email --region us-east-1)
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 998383315469.dkr.ecr.us-east-1.amazonaws.com
-    - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
-    - docker push $REPOSITORY_URL:$TAG
-  tags:
-    - aws
+
+  Build:
+    stage: build
+    script:
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
+      - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+      - docker push $REPOSITORY_URL:$TAG
+    tags:
+      - aws
+
+  Deploy:
+    stage: deploy
+    script:
+      - docker push $REPOSITORY_URL:$TAG
+    tags:
+      - aws
+    only:
+      - master
