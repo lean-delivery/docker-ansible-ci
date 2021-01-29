@@ -20,7 +20,7 @@ RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip setuptools wheel
 #   molecule==2.21.dev46
 RUN /usr/bin/python3 -m pip install --upgrade ansible==$ANSIBLE_VERSION docker pyOpenSSL PyYAML
 RUN /usr/bin/python3 -m pip install --upgrade pywinrm[credssp] boto boto3
-RUN /usr/bin/python3 -m pip install --upgrade molecule==$MOLECULE_VERSION
+RUN /usr/bin/python3 -m pip install --upgrade --ignore-installed distlib molecule==$MOLECULE_VERSION
 RUN /usr/bin/python3 -m pip install git+https://github.com/ansible/ansible-lint.git && \
     ansible --version && \
     ansible-lint --version && \
