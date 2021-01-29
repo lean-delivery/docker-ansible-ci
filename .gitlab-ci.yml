@@ -5,6 +5,7 @@ before_script:
   - docker-credential-ecr-login version
   - cat /root/.docker/config.json
   - which docker-credential-ecr-login
+  - docker-credential-ecr-login list
   # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
 
 ansible-2.9:
