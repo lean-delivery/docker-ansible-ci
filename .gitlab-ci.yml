@@ -48,8 +48,8 @@ ansible-2.10 deploy:
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
   script:
+    - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker image ls
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
     - docker push $REPOSITORY_URL:$TAG
   tags:
     - aws
