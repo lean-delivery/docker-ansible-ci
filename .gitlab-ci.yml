@@ -1,60 +1,47 @@
-stages:
-  - build
-  - deploy
-
 before_script:
   - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
   - pip install awscli
+  - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
 
-ansible-2.9 build:
-  stage: build
-  extends: .template_build
+ansible-2.9:
+  extends: .template
   variables:
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.9"
-  artifacts:
-    paths:
-      - "9"
 
-ansible-2.10 build:
-  stage: build
-  extends: .template_build
+ansible-2.10:
+  extends: .template
   variables:
     ANSIBLE_VERSION: "2.10.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.10"
-  artifacts:
-    paths:
-      - "10"
 
 ansible-2.9 deploy:
-  stage: deploy
   extends: .template_deploy
   variables:
-    LOCAL_PATH: '9'
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.9"
 
 ansible-2.10 deploy:
-  stage: deploy
   extends: .template_deploy
   variables:
-    LOCAL_PATH: '10'
     ANSIBLE_VERSION: "2.10.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.10"
 
-.template_build:
+.template:
   image: docker:latest
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
   script:
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+    - docker image ls
   tags:
     - aws
+  except:
+    - master
 
 .template_deploy:
   image: docker:latest
@@ -66,5 +53,5 @@ ansible-2.10 deploy:
     - docker push $REPOSITORY_URL:$TAG
   tags:
     - aws
-  # only:
-  #   - master
+  only:
+    - master
