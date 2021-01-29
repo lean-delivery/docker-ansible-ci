@@ -1,11 +1,16 @@
 ---
-language: bash
+os: linux
+dist: bionic
+language: shell
+python:
+  - "3.8"
 
-branches:
-  only:
-  - master
 
-matrix:
+# branches:
+#   only:
+#   - master
+
+jobs:
   fast_finish: true
   include:
   - name: "ansible-2.9"
@@ -18,11 +23,11 @@ matrix:
       - ANSIBLE_VERSION="2.8.*"
       - MOLECULE_VERSION="2.22"
       - TAG="ansible-2.8"
-  - name: "ansible-2.7"
-    env:
-     - ANSIBLE_VERSION="2.7.*"
-     - MOLECULE_VERSION="2.22"
-     - TAG="ansible-2.7"
+  # - name: "ansible-2.7"
+  #   env:
+  #    - ANSIBLE_VERSION="2.7.*"
+  #    - MOLECULE_VERSION="2.22"
+  #    - TAG="ansible-2.7"
 
 services:
   - docker

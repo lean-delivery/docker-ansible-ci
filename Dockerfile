@@ -13,11 +13,6 @@ RUN apk add --update --no-cache openssh-client
 
 
 RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip setuptools wheel
-#RUN pip3 install git+https://github.com/ansible/molecule@$MOLECULE_VERSION
-#RUN pip3 install \
-#   --index-url https://test.pypi.org/simple \
-#   --extra-index-url https://pypi.org/simple \
-#   molecule==2.21.dev46
 RUN /usr/bin/python3 -m pip install --upgrade ansible==$ANSIBLE_VERSION molecule==$MOLECULE_VERSION molecule-ec2 ansible-lint
 RUN /usr/bin/python3 -m pip install --upgrade pywinrm[credssp] boto boto3
 RUN ansible --version && \

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lean-delivery/docker-ansible-ci.svg?branch=master)](https://travis-ci.org/lean-delivery/docker-ansible-ci)
+
 docker-ansible-ci
 =========
 [![Build Status](https://gitlab.com/lean-delivery/docker-ansible-ci/badges/master/pipeline.svg)](https://gitlab.com/lean-delivery/docker-ansible-ci/pipelines)
