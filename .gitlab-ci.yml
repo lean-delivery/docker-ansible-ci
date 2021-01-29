@@ -2,6 +2,10 @@ stages:
   - build
   - deploy
 
+before_script:
+  - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
+  - pip install awscli
+
 ansible-2.9 build:
   stage: build
   extends: .template_build
@@ -46,9 +50,6 @@ ansible-2.10 deploy:
   image: docker:latest
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
-  before_script:
-    - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
-    - pip install awscli
   script:
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
