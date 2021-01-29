@@ -1,6 +1,7 @@
 before_script:
   - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
   - pip install awscli
+  - echo $DOCKER_AUTH_CONFIG
   # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
 
 ansible-2.9:
@@ -9,6 +10,7 @@ ansible-2.9:
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.9"
+    DOCKER_AUTH_CONFIG: "{\"credHelpers\": {\"998383315469.dkr.ecr.us-east-1.amazonaws.com\": \"ecr-login\"}}"
 
 ansible-2.10:
   extends: .template
@@ -38,6 +40,7 @@ ansible-2.10 deploy:
   script:
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker image ls
+    - echo $DOCKER_AUTH_CONFIG
     - docker push $REPOSITORY_URL:$TAG
   tags:
     - aws
