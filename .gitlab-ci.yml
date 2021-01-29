@@ -14,18 +14,14 @@ ansible-2.10:
 
 .template:
   image: docker:latest
-
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
-
   stages:
     - build
     - deploy
-
   before_script:
     - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
     - pip install awscli
-
   Build:
     stage: build
     script:
@@ -34,7 +30,6 @@ ansible-2.10:
       - docker push $REPOSITORY_URL:$TAG
     tags:
       - aws
-
   Deploy:
     stage: deploy
     script:
