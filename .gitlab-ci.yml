@@ -5,26 +5,26 @@ ansible-2.9:
     MOLECULE_VERSION: "2.22"
     TAG: "ansible-2.9"
 
-ansible-2.8:
-  extends: .template
-  variables:
-    ANSIBLE_VERSION: "2.8.*"
-    MOLECULE_VERSION: "2.22"
-    TAG: "ansible-2.8"
+# ansible-2.8:
+#   extends: .template
+#   variables:
+#     ANSIBLE_VERSION: "2.8.*"
+#     MOLECULE_VERSION: "2.22"
+#     TAG: "ansible-2.8"
 
-ansible-2.7:
-  extends: .template
-  variables:
-    ANSIBLE_VERSION: "2.7.*"
-    MOLECULE_VERSION: "2.22"
-    TAG: "ansible-2.7"
+# ansible-2.7:
+#   extends: .template
+#   variables:
+#     ANSIBLE_VERSION: "2.7.*"
+#     MOLECULE_VERSION: "2.22"
+#     TAG: "ansible-2.7"
 
 .template:
   image: "docker:latest"
   variables:
     REPOSITORY_URL: "998383315469.dkr.ecr.us-east-1.amazonaws.com/docker-ansible-ci"
   before_script:
-    - apk add --no-cache curl jq python py-pip
+    - apk add --update --no-cache curl jq python py-pip
     - pip install awscli
   script:
     - $(aws ecr get-login --no-include-email --region us-east-1)
