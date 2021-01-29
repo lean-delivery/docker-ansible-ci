@@ -1,7 +1,7 @@
 before_script:
   - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
   - pip install awscli
-  - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
+  # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
 
 ansible-2.9:
   extends: .template
