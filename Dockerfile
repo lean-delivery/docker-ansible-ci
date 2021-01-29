@@ -1,7 +1,7 @@
 FROM docker:latest
 
 ARG ANSIBLE_VERSION=2.9.*
-ARG MOLECULE_VERSION=3.*
+ARG MOLECULE_VERSION=3.2.*
 
 ENV ANSIBLE_VERSION=${ANSIBLE_VERSION}
 ENV MOLECULE_VERSION=${MOLECULE_VERSION}
@@ -18,10 +18,8 @@ RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip setuptools wheel
 #   --index-url https://test.pypi.org/simple \
 #   --extra-index-url https://pypi.org/simple \
 #   molecule==2.21.dev46
-RUN /usr/bin/python3 -m pip install --upgrade ansible==$ANSIBLE_VERSION docker pyOpenSSL PyYAML
+RUN /usr/bin/python3 -m pip install --upgrade ansible==2.9.* molecule==3.* molecule-ec2 ansible-lint
 RUN /usr/bin/python3 -m pip install --upgrade pywinrm[credssp] boto boto3
-RUN /usr/bin/python3 -m pip install --upgrade --ignore-installed distlib molecule==$MOLECULE_VERSION
-RUN /usr/bin/python3 -m pip install git+https://github.com/ansible/ansible-lint.git && \
-    ansible --version && \
+RUN ansible --version && \
     ansible-lint --version && \
     molecule --version
