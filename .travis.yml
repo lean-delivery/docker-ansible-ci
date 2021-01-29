@@ -13,21 +13,16 @@ python:
 jobs:
   fast_finish: true
   include:
+  - name: "ansible-2.10"
+    env:
+      - ANSIBLE_VERSION="2.10.*"
+      - MOLECULE_VERSION="3.*"
+      - TAG="ansible-2.10"
   - name: "ansible-2.9"
     env:
       - ANSIBLE_VERSION="2.9.*"
-      - MOLECULE_VERSION="2.22"
+      - MOLECULE_VERSION="3.*"
       - TAG="ansible-2.9"
-  - name: "ansible-2.8"
-    env:
-      - ANSIBLE_VERSION="2.8.*"
-      - MOLECULE_VERSION="2.22"
-      - TAG="ansible-2.8"
-  # - name: "ansible-2.7"
-  #   env:
-  #    - ANSIBLE_VERSION="2.7.*"
-  #    - MOLECULE_VERSION="2.22"
-  #    - TAG="ansible-2.7"
 
 services:
   - docker
