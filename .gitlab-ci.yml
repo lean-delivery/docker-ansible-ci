@@ -41,7 +41,6 @@ ansible-2.10 deploy:
   script:
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker image ls
-    - echo $DOCKER_AUTH_CONFIG
   tags:
     - aws
   except:
