@@ -4,11 +4,6 @@ before_script:
   - go get -u github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login
   - mkdir -p /root/.docker
   - echo "{ \"credsStore\":\"ecr-login\" }" > /root/.docker/config.json
-  - cat /root/.docker/config.json
-  - which docker-credential-ecr-login
-  - docker-credential-ecr-login list
-  # - cat /root/.docker/config.json
-  # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
 
 ansible-2.9:
   extends: .template
@@ -17,7 +12,6 @@ ansible-2.9:
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-2.9"
-    # DOCKER_AUTH_CONFIG: "{\"credHelpers\": {\"998383315469.dkr.ecr.us-east-1.amazonaws.com\": \"ecr-login\"}}"
 
 ansible-2.10:
   extends: .template
@@ -41,21 +35,20 @@ ansible-2.10 deploy:
     TAG: "ansible-2.10"
 
 .template:
-  # image: golang:alpine3.13
+  image: golang:alpine3.13
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
   script:
     - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker image ls
     - echo $DOCKER_AUTH_CONFIG
-    - docker push $REPOSITORY_URL:$TAG
   tags:
     - aws
   except:
     - master
 
 .template_deploy:
-  image: docker:latest
+  image: golang:alpine3.13
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
   script:
