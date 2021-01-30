@@ -1,7 +1,8 @@
 before_script:
   - apk add --update --no-cache curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev
   - pip install awscli
-  - ls -la /bin/docker-credential-ecr-login
+  - whoami
+  - ls -la /root/bin/docker-credential-ecr-login
   - cat /root/.docker/config.json
   - which docker-credential-ecr-login
   - docker-credential-ecr-login list
