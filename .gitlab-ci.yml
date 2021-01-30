@@ -3,7 +3,8 @@ before_script:
   - pip install awscli
   - go get -u github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login
   - mkdir -p /root/.docker
-  - echo "{ \"credsStore\"\:\"ecr-login\" }" > /root/.docker/config.json
+  - echo "{ \"credsStore\":\"ecr-login\" }" > /root/.docker/config.json
+  - cat /root/.docker/config.json
   - which docker-credential-ecr-login
   - docker-credential-ecr-login list
   # - cat /root/.docker/config.json
