@@ -3,7 +3,7 @@ before_script:
   - pip install awscli
   - whoami
   - ls -la /root/bin/docker-credential-ecr-login
-  - which docker-credential-ecr-login
+  # - which docker-credential-ecr-login
   - docker-credential-ecr-login list
   - cat /root/.docker/config.json
   # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_REPO
