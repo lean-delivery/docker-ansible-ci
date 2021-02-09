@@ -10,9 +10,11 @@ LABEL maintainer="team@lean-delivery.com"
 
 RUN apk add --update --no-cache git gcc musl-dev libffi-dev openssl-dev make py3-configobj \
   py3-pip py3-setuptools python3 python3-dev openssh-client
+RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip
+RUN apk add --update --no-cache rust cargo
 
 
-RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip setuptools wheel \
+RUN /usr/bin/python3 -m pip install --no-cache setuptools wheel \
   ansible==$ANSIBLE_VERSION molecule==$MOLECULE_VERSION molecule-docker molecule-ec2 ansible-lint \
   pywinrm[credssp] boto boto3
 RUN ansible-galaxy collection install community.molecule && \
