@@ -9,7 +9,7 @@ ENV MOLECULE_VERSION=${MOLECULE_VERSION}
 LABEL maintainer="team@lean-delivery.com"
 
 RUN apk add --update --no-cache git gcc musl-dev libffi-dev openssl-dev make py3-configobj \
-  py3-pip py3-setuptools python3 python3-dev openssh-client
+  py3-pip py3-setuptools python3 python3-dev openssh-client rust
 
 
 RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip setuptools wheel \
