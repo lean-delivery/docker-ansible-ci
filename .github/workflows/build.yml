@@ -10,7 +10,7 @@ env:
   DOCKERHUB_URL: leandelivery/docker-ansible-ci
   MOLECULE_VERSION: "3.*"
 jobs:
-  ansible-2.9:
+  ansible-2_9:
     runs-on: ubuntu-latest
     container: golang:alpine3.13
     steps:
@@ -25,7 +25,7 @@ jobs:
         run: |
           docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
           docker image ls
-  ansible-2.10:
+  ansible-2_10:
     runs-on: ubuntu-latest
     container: golang:alpine3.13
     steps:
