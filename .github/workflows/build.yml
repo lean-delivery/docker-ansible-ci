@@ -12,7 +12,6 @@ env:
 jobs:
   ansible-2_9:
     runs-on: ubuntu-latest
-    container: golang:alpine3.13
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,7 +26,6 @@ jobs:
           docker image ls
   ansible-2_10:
     runs-on: ubuntu-latest
-    container: golang:alpine3.13
     steps:
       - name: Checkout
         uses: actions/checkout@v2
