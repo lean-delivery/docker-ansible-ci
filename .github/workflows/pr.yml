@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 env:
   DOCKERHUB_URL: leandelivery/docker-ansible-ci
+  DOCKERHUB_USERNAME: leandeliveryrobot
   MOLECULE_VERSION: "3.*"
 jobs:
   ansible-2_9:
@@ -21,6 +22,8 @@ jobs:
         run: |
           docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
           docker image ls
+          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          docker logout
   ansible-2_10:
     runs-on: ubuntu-latest
     steps:
