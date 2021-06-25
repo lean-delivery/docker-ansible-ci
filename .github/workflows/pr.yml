@@ -1,0 +1,37 @@
+---
+name: CI
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+env:
+  DOCKERHUB_URL: leandelivery/docker-ansible-ci
+  MOLECULE_VERSION: "3.*"
+jobs:
+  ansible-2_9:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        env:
+          TAG: ansible-2.9
+          ANSIBLE_VERSION: 2.9.*
+        run: |
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+          docker image ls
+  ansible-2_10:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        env:
+          TAG: ansible-2.10
+          ANSIBLE_VERSION: 2.10.*
+        run: |
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+          docker image ls
