@@ -50,12 +50,10 @@ ansible-2.10 deploy:
   image: golang:alpine3.13
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
-    DOCKERHUB_URL: leandelivery/docker-ansible-ci
   script:
-    - docker build -t $REPOSITORY_URL:$TAG -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+    - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
     - docker image ls
     - docker push $REPOSITORY_URL:$TAG
-    - bash docker_push
   tags:
     - aws
   only:
