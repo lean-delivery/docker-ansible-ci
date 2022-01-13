@@ -27,6 +27,13 @@ ansible-4:
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-4"
 
+ansible-5:
+  extends: .template
+  variables:
+    ANSIBLE_VERSION: "5.*"
+    MOLECULE_VERSION: "3.*"
+    TAG: "ansible-5"
+
 ansible-2.9 deploy:
   extends: .template_deploy
   variables:
@@ -47,6 +54,13 @@ ansible-4 deploy:
     ANSIBLE_VERSION: "4.*"
     MOLECULE_VERSION: "3.*"
     TAG: "ansible-4"
+
+ansible-5 deploy:
+  extends: .template_deploy
+  variables:
+    ANSIBLE_VERSION: "5.*"
+    MOLECULE_VERSION: "3.*"
+    TAG: "ansible-5"
 
 .template:
   image: golang:alpine3.13
