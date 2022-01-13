@@ -15,7 +15,7 @@ RUN apk add --update --no-cache rust cargo
 
 
 RUN /usr/bin/python3 -m pip install --no-cache setuptools wheel \
-  ansible==$ANSIBLE_VERSION molecule==$MOLECULE_VERSION molecule-docker molecule-ec2 ansible-lint==4.* \
+  ansible==$ANSIBLE_VERSION molecule==$MOLECULE_VERSION molecule-docker molecule-ec2 ansible-lint==5.* \
   pywinrm[credssp] boto boto3
 RUN ansible-galaxy collection install community.molecule && \
   ansible --version && \
