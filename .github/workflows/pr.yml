@@ -6,7 +6,6 @@ on:
 env:
   DOCKERHUB_URL: leandelivery/docker-ansible-ci
   DOCKERHUB_USERNAME: leandeliveryrobot
-  MOLECULE_VERSION: "3.*"
 jobs:
   ansible-2_9:
     runs-on: ubuntu-latest
@@ -19,8 +18,10 @@ jobs:
         env:
           TAG: ansible-2.9
           ANSIBLE_VERSION: 2.9.*
+          MOLECULE_VERSION: 3.*
+          ANSIBLE_LINT_VERSION: 5.*
         run: |
-          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
           docker image ls
   ansible-3:
     runs-on: ubuntu-latest
@@ -33,8 +34,10 @@ jobs:
         env:
           TAG: ansible-3
           ANSIBLE_VERSION: 3.*
+          MOLECULE_VERSION: 3.*
+          ANSIBLE_LINT_VERSION: 5.*
         run: |
-          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
           docker image ls
   ansible-4:
     runs-on: ubuntu-latest
@@ -47,8 +50,10 @@ jobs:
         env:
           TAG: ansible-4
           ANSIBLE_VERSION: 4.*
+          MOLECULE_VERSION: 3.*
+          ANSIBLE_LINT_VERSION: 5.*
         run: |
-          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
           docker image ls
   ansible-5:
     runs-on: ubuntu-latest
@@ -61,6 +66,24 @@ jobs:
         env:
           TAG: ansible-5
           ANSIBLE_VERSION: 5.*
+          MOLECULE_VERSION: 3.*
+          ANSIBLE_LINT_VERSION: 5.*
         run: |
-          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
+          docker image ls
+  ansible-6:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        env:
+          TAG: ansible-6
+          ANSIBLE_VERSION: 6.*
+          MOLECULE_VERSION: 4.*
+          ANSIBLE_LINT_VERSION: 6.*
+        run: |
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
           docker image ls

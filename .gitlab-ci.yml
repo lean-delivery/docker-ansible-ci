@@ -11,6 +11,7 @@ ansible-2.9:
     AWS_REGION: "us-east-1"
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-2.9"
 
 ansible-3:
@@ -18,6 +19,7 @@ ansible-3:
   variables:
     ANSIBLE_VERSION: "3.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-3"
 
 ansible-4:
@@ -25,6 +27,7 @@ ansible-4:
   variables:
     ANSIBLE_VERSION: "4.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-4"
 
 ansible-5:
@@ -32,13 +35,23 @@ ansible-5:
   variables:
     ANSIBLE_VERSION: "5.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-5"
+
+ansible-6:
+  extends: .template
+  variables:
+    ANSIBLE_VERSION: "6.*"
+    MOLECULE_VERSION: "4.*"
+    ANSIBLE_LINT_VERSION: "6.*"
+    TAG: "ansible-6"
 
 ansible-2.9 deploy:
   extends: .template_deploy
   variables:
     ANSIBLE_VERSION: "2.9.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-2.9"
 
 ansible-3 deploy:
@@ -46,6 +59,7 @@ ansible-3 deploy:
   variables:
     ANSIBLE_VERSION: "3.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-3"
 
 ansible-4 deploy:
@@ -53,6 +67,7 @@ ansible-4 deploy:
   variables:
     ANSIBLE_VERSION: "4.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-4"
 
 ansible-5 deploy:
@@ -60,6 +75,15 @@ ansible-5 deploy:
   variables:
     ANSIBLE_VERSION: "5.*"
     MOLECULE_VERSION: "3.*"
+    ANSIBLE_LINT_VERSION: "5.*"
+    TAG: "ansible-5"
+
+ansible-6 deploy:
+  extends: .template_deploy
+  variables:
+    ANSIBLE_VERSION: "6.*"
+    MOLECULE_VERSION: "4.*"
+    ANSIBLE_LINT_VERSION: "6.*"
     TAG: "ansible-5"
 
 .template:
@@ -67,7 +91,7 @@ ansible-5 deploy:
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
   script:
-    - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+    - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
     - docker image ls
   tags:
     - aws
@@ -79,7 +103,7 @@ ansible-5 deploy:
   variables:
     REPOSITORY_URL: $AWS_ECR_REPO/docker-ansible-ci
   script:
-    - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION .
+    - docker build -t $REPOSITORY_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
     - docker image ls
     - docker push $REPOSITORY_URL:$TAG
   tags:
