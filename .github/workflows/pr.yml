@@ -87,3 +87,19 @@ jobs:
         run: |
           docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
           docker image ls
+  ansible-7:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        env:
+          TAG: ansible-7
+          ANSIBLE_VERSION: 7.*
+          MOLECULE_VERSION: 4.*
+          ANSIBLE_LINT_VERSION: 6.*
+        run: |
+          docker build -t $DOCKERHUB_URL:$TAG --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION --build-arg MOLECULE_VERSION=$MOLECULE_VERSION --build-arg ANSIBLE_LINT_VERSION=$ANSIBLE_LINT_VERSION .
+          docker image ls
