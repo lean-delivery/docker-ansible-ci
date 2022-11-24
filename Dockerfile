@@ -13,7 +13,7 @@ LABEL maintainer="team@lean-delivery.com"
 RUN apk add --update --no-cache git gcc musl-dev libffi-dev openssl-dev make py3-configobj \
   py3-pip py3-setuptools python3 python3-dev openssh-client yamllint
 RUN /usr/bin/python3 -m pip install --no-cache --upgrade pip
-RUN apk add --update --no-cache rust cargo
+RUN apk add --update --no-cache rust cargo rsync
 
 
 RUN /usr/bin/python3 -m pip install --no-cache setuptools wheel \
