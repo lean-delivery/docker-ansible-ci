@@ -14,22 +14,6 @@ ansible-2.9:
     ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-2.9"
 
-ansible-3:
-  extends: .template
-  variables:
-    ANSIBLE_VERSION: "3.*"
-    MOLECULE_VERSION: "3.*"
-    ANSIBLE_LINT_VERSION: "5.*"
-    TAG: "ansible-3"
-
-ansible-4:
-  extends: .template
-  variables:
-    ANSIBLE_VERSION: "4.*"
-    MOLECULE_VERSION: "3.*"
-    ANSIBLE_LINT_VERSION: "5.*"
-    TAG: "ansible-4"
-
 ansible-5:
   extends: .template
   variables:
@@ -54,22 +38,6 @@ ansible-2.9 deploy:
     ANSIBLE_LINT_VERSION: "5.*"
     TAG: "ansible-2.9"
 
-ansible-3 deploy:
-  extends: .template_deploy
-  variables:
-    ANSIBLE_VERSION: "3.*"
-    MOLECULE_VERSION: "3.*"
-    ANSIBLE_LINT_VERSION: "5.*"
-    TAG: "ansible-3"
-
-ansible-4 deploy:
-  extends: .template_deploy
-  variables:
-    ANSIBLE_VERSION: "4.*"
-    MOLECULE_VERSION: "3.*"
-    ANSIBLE_LINT_VERSION: "5.*"
-    TAG: "ansible-4"
-
 ansible-5 deploy:
   extends: .template_deploy
   variables:
@@ -84,7 +52,7 @@ ansible-6 deploy:
     ANSIBLE_VERSION: "6.*"
     MOLECULE_VERSION: "4.*"
     ANSIBLE_LINT_VERSION: "6.*"
-    TAG: "ansible-5"
+    TAG: "ansible-6"
 
 .template:
   image: golang:alpine3.13
